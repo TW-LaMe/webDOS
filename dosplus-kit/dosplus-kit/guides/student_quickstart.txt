@@ -1,5 +1,0 @@
-Welcome to DOS+!
-1. Turn on your Chromebook.
-2. Launch the DOS emulator.
-3. Use the menu to start programs.
-4. To swap disks: Hold CTRL+SHIFT and press S.
