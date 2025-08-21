@@ -1,0 +1,7 @@
+Disk Swap Help
+- In DOSBox (Chromebook mapping): CTRL+SHIFT+S swaps virtual disks
+- In 86Box/PCem: Use "Change Drive"
+- In v86: Click "Insert Disk" on the toolbar
+
+Fun Fact: The swap key works in every menu.
+Even the ones you haven't found yet.

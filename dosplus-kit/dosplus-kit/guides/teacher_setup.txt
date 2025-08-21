@@ -1,0 +1,3 @@
+This build is classroom-safe, boots directly to a menu, and avoids complex key combos.
+Swap key works across Chromebooks without touching F-keys.
+Docs are included for students.

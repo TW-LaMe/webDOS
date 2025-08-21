@@ -1,0 +1,12 @@
+# DOSBox Keymapper
+# Remap Swap Disk from CTRL+F4 to CTRL+SHIFT+S
+hand_scroll up "key 273"
+hand_scroll down "key 274"
+
+mod_1 "key 306"    # Ctrl
+mod_2 "key 304"    # Shift
+
+key_s "key 115" "mod_1" "mod_2" "swapimg"
+
+# (Optional) remove old binding so F4 does nothing
+key_f4
