@@ -1,50 +1,41 @@
 import { launchDOS } from './dosplus-emulator.js';
+import { showOnboarding } from './onboarding.js';
+import { enableHauntedMode } from './haunted.js';
+import { detectEnvironment } from './env-check.js';
 
 window.onload = async () => {
-  const dos = await launchDOS('#emulator-container', {
-    diskImage: 'https://js-dos.com/cdn/6.22/games/doom.jsdos',
-    onboarding: true
-  });
+  const container = '#emulator-container';
+  const diskImage = getDiskImageFromURL() || 'https://js-dos.com/cdn/6.22/games/doom.jsdos';
 
-  listFiles(dos);
+  const env = detectEnvironment(); // e.g., { isChromebook: true, isTouch: false }
+
+  try {
+    const dos = await launchDOS(container, { diskImage, env });
+
+    showOnboarding(dos, env); // overlays, help panels, per-game README
+
+    if (shouldEnableHauntedMode()) {
+      enableHauntedMode(dos); // secret triggers, overlays, spooky assets
+    }
+
+    setupExportTools(dos); // save/export for student programs
+
+  } catch (err) {
+    console.error('DOS+ failed to launch:', err);
+    document.querySelector(container).innerText = 'Failed to load DOS+ environment.';
+  }
 };
 
-async function listFiles(dos) {
-  const files = await dos.fs.list();
-  const list = document.getElementById('file-list');
-  list.innerHTML = '';
-
-  files.forEach(file => {
-    const li = document.createElement('li');
-    li.textContent = file;
-    li.onclick = () => previewFile(dos, file);
-    list.appendChild(li);
-  });
+function getDiskImageFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('disk'); // e.g., ?disk=mathgame.jsdos
 }
 
-async function previewFile(dos, filename) {
-  try {
-    const blob = await dos.getFile(filename);
-    const text = await blob.text();
-    const preview = document.getElementById('file-preview');
-    preview.innerHTML = '';
+function shouldEnableHauntedMode() {
+  return window.location.hash.includes('#haunt'); // or other clue-based triggers
+}
 
-    const content = document.createElement('pre');
-    content.textContent = text;
-    preview.appendChild(content);
-
-    const exportBtn = document.createElement('button');
-    exportBtn.textContent = 'Export';
-    exportBtn.onclick = () => {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      a.click();
-      URL.revokeObjectURL(url);
-    };
-    preview.appendChild(exportBtn);
-  } catch (err) {
-    document.getElementById('file-preview').textContent = 'Cannot preview this file.';
-  }
+function setupExportTools(dos) {
+  // Placeholder for USB/CD/floppy export logic
+  // Could include download buttons, file dialogs, etc.
 }
