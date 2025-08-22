@@ -2,7 +2,7 @@ import { launchDOS } from './dosplus-emulator.js';
 
 window.onload = async () => {
   const dos = await launchDOS('#emulator-container', {
-    diskImage: 'starter.img',
+    diskImage: 'https://js-dos.com/cdn/6.22/games/doom.jsdos',
     onboarding: true
   });
 
