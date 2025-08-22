@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>DOS+ Portal</title>
-  <link rel="stylesheet" href="style.css" />
-  <script type="module" src="main.js"></script>
-  <script src="https://js-dos.com/6.22/current/js-dos.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- js-dos style sheet -->
+    <link rel="stylesheet" href="https://v8.js-dos.com/latest/js-dos.css">
+    <!-- js-dos -->
+    <script src="https://v8.js-dos.com/latest/js-dos.js"></script>
+    <title>webDOS shenanigans</title>
 </head>
 <body>
-  <header>
-    <h1>DOS+ Portal</h1>
-    <p>Welcome to your retro workspace</p>
-  </header>
+    <h1>boingo</h1>
+    <div id="dos" style="width: 100vw; height: 60vw;"></div>
 
-  <main>
-    <div id="emulator-container"></div>
-
-    <section id="file-browser">
-      <h2>My DOS+ Files</h2>
-      <ul id="file-list"></ul>
-      <div id="file-preview"></div>
-    </section>
-  </main>
+    <script>
+        Dos(document.getElementById("dos"), {
+            url: "/workspaces/webDOS/bundle.jsdos",
+        });
+    </script>
 </body>
 </html>
